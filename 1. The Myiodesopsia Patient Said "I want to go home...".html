@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I want to go home...</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap">
+    <style>
+        body {
+            font-family: 'Fugaz One', cursive;
+            background-color: #75306d;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Hide overflow to prevent horizontal scrollbar */
+            position: relative; /* Position relative for absolute positioning of points */
+        }
+
+        h1 {
+            font-size: 2em;
+            text-align: center;
+            color: #a7fa0c;
+            text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            animation: flicker 0.5s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Point animation */
+        .point {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #a7fa0c; /* Point color */
+            border-radius: 50%; /* Make it round */
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Add shadow effect */
+            animation: move-point 5s linear infinite, flicker-point 0.5s infinite alternate; /* Animate the point */
+        }
+
+        @keyframes move-point {
+            0% {
+                transform: translateX(-10px); /* Move the point off-screen to the left */
+            }
+            100% {
+                transform: translateX(calc(100vw + 10px)); /* Move the point off-screen to the right */
+            }
+        }
+
+        @keyframes flicker-point {
+            0% {
+                opacity: 1; /* Fully visible */
+            }
+            100% {
+                opacity: 0; /* Fully transparent */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>I want to go home...</h1>
+
+    <script>
+        // Dynamically create 100 points
+        for (let i = 0; i < 100; i++) {
+            createPoint();
+        }
+
+        function createPoint() {
+            const point = document.createElement('div');
+            point.classList.add('point');
+            document.body.appendChild(point);
+            positionPoint(point);
+        }
+
+        function positionPoint(point) {
+            const randomTop = Math.random() * 100; // Random top position from 0 to 100%
+            const randomDelay = Math.random() * 5; // Random delay from 0 to 5 seconds
+            point.style.top = `${randomTop}%`;
+            point.style.animationDelay = `${randomDelay}s`;
+        }
+    </script>
+</body>
+</html>
